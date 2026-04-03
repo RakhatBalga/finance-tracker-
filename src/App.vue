@@ -5,10 +5,10 @@
       <p class="subtitle">Take control of your wealth</p>
     </header>
     
-    <SummaryCards :total="total" :income="income" :expenses="Math.abs(expenses)" />
+    <SummaryCards :total="total || 0" />
     
     <div class="main-content">
-      <TransactionForm @add="handleAdd" />
+      <TransactionForm @add-transaction="handleAdd" />
       <TransactionList :transactions="transactions" @delete="handleDelete" />
     </div>
   </div>
@@ -20,7 +20,8 @@ import SummaryCards from './components/SummaryCards.vue';
 import TransactionForm from './components/TransactionForm.vue';
 import TransactionList from './components/TransactionList.vue';
 
-const { transactions, total, income, expenses, addTransaction, deleteTransaction } = useTransactions();
+// Removed income and expenses since they aren't in useTransactions yet
+const { transactions, total, addTransaction, deleteTransaction } = useTransactions();
 
 const handleAdd = (data: { text: string; amount: number }) => {
   addTransaction(data);
